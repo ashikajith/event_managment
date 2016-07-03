@@ -6,6 +6,16 @@ class EventsController < ApplicationController
   end
 
   def show
+    @map_json = Gmaps4rails.build_markers(@event) do |event, marker|
+      marker.lat event.latitude
+      marker.lng event.longitude
+      marker.infowindow event.description
+      marker.picture({
+        'url' => 'http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png',
+        'width' => 32,
+        'height' => 32
+        })
+    end
   end
 
   def new
